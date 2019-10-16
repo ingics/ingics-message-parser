@@ -30,7 +30,8 @@ case 'message':
         yargs.showHelp();
         process.exit(-1);
     }
-    parser.parseMessage(argv._[1], (data) => {
+    parser.parseMessage(argv._[1], (data, index) => {
+        console.log(`message #${index}`);
         console.log(data);
     })
     break;
