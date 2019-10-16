@@ -58,6 +58,12 @@ parser.parseMessage(message, (data) => {
 
 ## Command Line Usage
 
+### Set up Env
+```
+npm link
+npm link @ingics/message-parser
+```
+
 ### Example for parse gateway message:
 `node bin/parse.js message '$GPRP,3C253BC92ABB,C0563D4FF278,-56,02010612FF590080BCD200000E161600FFFFFFFFFFFF'`
 
