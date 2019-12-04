@@ -4,7 +4,7 @@ describe('various ibs01 payload test', () => {
     it('text mode, button pressed', (done) => {
         const message = '$GPRP,FE581D9DB308,2F9203AFA66B,-21,02010612FF590080BC360101FFFFFFFFFFFFFFFFFFFF';
         parser.parseMessage(message, (data) => {
-            expect(data.parsedPayload.type).toBe('iBS01(H/G)');
+            expect(data.parsedPayload.type).toBe('iBS01');
             expect(data.beacon).toBe('FE581D9DB308');
             expect(data.gateway).toBe('2F9203AFA66B');
             expect(data.parsedPayload.battery).toBe(310);
@@ -15,7 +15,7 @@ describe('various ibs01 payload test', () => {
     it('text mode, hall sensor', (done) => {
         const message = '$GPRP,F704B6D48BE8,1173AE7325A2,-24,02010612FF590080BC2B0104FFFFFFFFFFFFFFFFFFFF';
         parser.parseMessage(message, (data) => {
-            expect(data.parsedPayload.type).toBe('iBS01(H/G)');
+            expect(data.parsedPayload.type).toBe('iBS01');
             expect(data.parsedPayload.battery).toBe(299);
             expect(data.parsedPayload.events.hall).toBe(true);
             done();
@@ -24,7 +24,7 @@ describe('various ibs01 payload test', () => {
     it('text mode, payload parser, moving and fall', (done) => {
         const payload = '02010612FF590080BC2B010AFFFFFFFFFFFFFFFFFFFF';
         const data = parser.parsePayload(payload);
-        expect(data.type).toBe('iBS01(H/G)');
+        expect(data.type).toBe('iBS01');
         expect(data.events.fall).toBe(true);
         expect(data.events.moving).toBe(true);
         done();
@@ -49,7 +49,7 @@ describe('various ibs01 payload test', () => {
                 expect(data.parsedPayload.humidity).toBe(67);
                 expect(data.parsedPayload.temperature).toBe(3450);
             } else if (index === 1) {
-                expect(data.parsedPayload.type).toBe('iBS01(H/G)');
+                expect(data.parsedPayload.type).toBe('iBS01');
                 expect(data.parsedPayload.battery).toBe(299);
                 expect(data.parsedPayload.events.hall).toBe(true);
                 done();    
@@ -69,11 +69,23 @@ describe('various ibs01 payload test', () => {
                 expect(data.parsedPayload.humidity).toBe(67);
                 expect(data.parsedPayload.temperature).toBe(3450);
             } else if (index === 1) {
-                expect(data.parsedPayload.type).toBe('iBS01(H/G)');
+                expect(data.parsedPayload.type).toBe('iBS01');
                 expect(data.parsedPayload.battery).toBe(299);
                 expect(data.parsedPayload.events.hall).toBe(true);
                 done();    
             }
         });
     });
+});
+
+describe('real failure case set', () => {
+    it ('test #1', (done) => {
+        const message = '$GPRP,0C61CFC14B58,CC4B73906F8C,-21,02010612FF0D0083BC4D010000002400FCFE22074B58,1575440728';
+        parser.parseMessage(message, (data) => {
+            expect(data.parsedPayload.type).toBe('iRS02RG');
+            expect(data.parsedPayload.accel.x).toBe(0);
+            expect(data.parsedPayload.accel.z).toBe(-260);
+            done();
+        });    
+    })
 });
