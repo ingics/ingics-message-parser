@@ -9,7 +9,7 @@ describe('various ibs01 payload test', () => {
             expect(data.gateway).toBe('2F9203AFA66B');
             expect(data.parsedPayload.battery).toBe(310);
             expect(data.parsedPayload.events.button).toBe(true);
-            done();    
+            done();
         });
     });
     it('text mode, hall sensor', (done) => {
@@ -52,7 +52,7 @@ describe('various ibs01 payload test', () => {
                 expect(data.parsedPayload.type).toBe('iBS01');
                 expect(data.parsedPayload.battery).toBe(299);
                 expect(data.parsedPayload.events.hall).toBe(true);
-                done();    
+                done();
             }
         });
     });
@@ -60,7 +60,7 @@ describe('various ibs01 payload test', () => {
         const message = {
             data: [
                 '$GPRP,7ABA6F20ACCF,806172C89C09,-2,02010612FF590080BCFF00007A0D4300FFFFFFFFFFFF',
-                '$GPRP,F704B6D48BE8,1173AE7325A2,-24,02010612FF590080BC2B0104FFFFFFFFFFFFFFFFFFFF'    
+                '$GPRP,F704B6D48BE8,1173AE7325A2,-24,02010612FF590080BC2B0104FFFFFFFFFFFFFFFFFFFF'
             ]
         };
         parser.parseMessage(JSON.stringify(message), (data, index) => {
@@ -72,7 +72,7 @@ describe('various ibs01 payload test', () => {
                 expect(data.parsedPayload.type).toBe('iBS01');
                 expect(data.parsedPayload.battery).toBe(299);
                 expect(data.parsedPayload.events.hall).toBe(true);
-                done();    
+                done();
             }
         });
     });
@@ -86,7 +86,7 @@ describe('real failure case set', () => {
             expect(data.parsedPayload.accel.x).toBe(0);
             expect(data.parsedPayload.accel.z).toBe(-260);
             done();
-        });    
+        });
     })
     it ('test windows 10 desktop', (done) => {
         const message = '$GPRP,3D0A662DC412,C3674946C293,-62,1EFF0600010920025E294E5E30809130E56E2CA4701DC8EBED5396B6320B8F';
