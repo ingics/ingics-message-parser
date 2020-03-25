@@ -17,7 +17,7 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/timchaoingics/ingics-message-parser#readme",
   "dependencies": {
-    "yargs": "^14.2.0"
+    "yargs": "^14.2.2"
   },
   "devDependencies": {
     "jest": "^24.9.0"
