@@ -20,4 +20,13 @@ describe('various ibs03 payload test', () => {
             done();
         });
     })
+    it('iBS03RG', (done) => {
+        const message = '$GPRP,806FB0C9963F,C3674946C293,-71,02010619FF0D0081BC3E110A00F4FF00FF1600F6FF00FF1400F6FF08FF,1586245829'
+        parser.parseMessage(message, (data) => {
+            expect(data.parsedPayload.type).toBe('iBS03RG');
+            expect(data.parsedPayload.battery).toBe(318)
+            expect(data.parsedPayload.events.moving).toBe(true)
+            done();
+        });
+    })
 })
