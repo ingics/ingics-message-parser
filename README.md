@@ -2,12 +2,29 @@
 
 Parser library for Ingics BLE beacon and beacon gateway products.
 
-## Library Usage
+## Installation
+
+#### Github
+```bash
+npm install --save timscchao/ingics-message-parser
+```
+
+#### Local Settup
+Link package to local npm store, under message-parser folder
+```bash
+npm link
+```
+Link parser library to your project
+```bash
+npm link @ingics/message-parser
+```
+
+## Usage
 
 ### Parse BLE payload got from Ingics beacon
 
 #### Example:
-```
+```bash
 const parser = require('@ingics/message-parser');
 // payload string got from Ingics beacon (for example: iGS03T)
 const payload = '02010612FF590080BCD200000E161600FFFFFFFFFFFF';
@@ -16,7 +33,7 @@ console.log(parser.parsePayload(payload);
 ```
 
 #### Output:
-```
+```bash
 { mfg: 'Ingics',
   mfgCode: 89,
   battery: 210,
@@ -29,7 +46,7 @@ console.log(parser.parsePayload(payload);
 ### Parse full message got from Ingics gateway
 
 #### Example:
-```
+```bash
 const parser = require('@ingics/message-parser');
 // message string got from Ingics Gateway (for example: iGS01S)
 const message = '$GPRP,3C253BC92ABB,C0563D4FF278,-56,02010612FF590080BCD200000E161600FFFFFFFFFFFF';
@@ -59,7 +76,7 @@ parser.parseMessage(message, (data) => {
 ## Command Line Usage
 
 ### Set up Env
-```
+```bash
 npm link
 npm link @ingics/message-parser
 ```
