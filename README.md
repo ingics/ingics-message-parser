@@ -4,9 +4,9 @@ Parser library for Ingics BLE beacon and beacon gateway products.
 
 ## Installation
 
-#### Github
+#### Npm Install with Github
 ```bash
-npm install --save timscchao/ingics-message-parser
+npm install --save ingics/ingics-message-parser
 ```
 
 #### Local Settup
