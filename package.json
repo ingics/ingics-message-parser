@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "lint": "eslint --fix lib/*.js"
+    "lint": "eslint --fix bin/*.js lib/*.js __test__/*.js"
   },
   "bin": {
     "ingics-parser": "./bin/parse.js"
@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "eslint": "^7.0.0",
+    "eslint-plugin-jest": "^23.11.0",
     "jest": "^24.9.0",
     "lodash": "^4.17.15"
   }

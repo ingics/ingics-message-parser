@@ -3,9 +3,14 @@ module.exports = {
         'browser': true,
         'commonjs': true,
         'es6': true,
-        'node': true
+        'node': true,
+        'jest/globals': true
     },
-    'extends': 'eslint:recommended',
+    'extends': [
+        'eslint:recommended',
+        'plugin:jest/recommended',
+        'plugin:jest/style'
+    ],
     'globals': {
         'Atomics': 'readonly',
         'SharedArrayBuffer': 'readonly'
@@ -13,6 +18,7 @@ module.exports = {
     'parserOptions': {
         'ecmaVersion': 11
     },
+    'plugins': ['jest'],
     'rules': {
         'indent': [
             'error',
