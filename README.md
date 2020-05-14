@@ -21,12 +21,12 @@ npm link @ingics/message-parser
 
 ## Usage
 
-### Parse BLE payload got from Ingics beacon
+### Parse BLE payload (advertisement) got from Ingics beacon
 
-#### Example:
+#### Example (iBS01T):
 ```bash
 const parser = require('@ingics/message-parser');
-// payload string got from Ingics beacon (for example: iGS03T)
+// payload string got from Ingics beacon (for example: iBS01T)
 const payload = '02010612FF590080BCD200000E161600FFFFFFFFFFFF';
 // send it to parser and print out the result
 console.log(parser.parsePayload(payload);
@@ -34,18 +34,32 @@ console.log(parser.parsePayload(payload);
 
 #### Output:
 ```bash
-{ mfg: 'Ingics',
-  mfgCode: 89,
-  battery: 210,
-  events: {},
-  type: 'iBS01T',
-  temperature: 5646,
-  humidity: 22 }
+ad {
+  raw:
+   <Buffer 02 01 06 12 ff 59 00 80 bc d2 00 00 0e 16 16 00 ff ff ff ff ff ff>,
+  flags: 6,
+  localName: undefined,
+  txPowerLevel: undefined,
+  manufacturerData:
+   msd {
+     raw: <Buffer 59 00 80 bc d2 00 00 0e 16 16 00 ff ff ff ff ff ff>,
+     mfg: 89,
+     company: 'Ingics',
+     code: 48256,
+     battery: 210,
+     events: {},
+     eventFlag: 0,
+     type: 'iBS01T',
+     temperature: 5646,
+     humidity: 22 },
+  serviceData: [],
+  serviceUuids: [],
+  serviceSolicitationUuids: [] }
 ```
 
 ### Parse full message got from Ingics gateway
 
-#### Example:
+#### Example (iBS01T):
 ```bash
 const parser = require('@ingics/message-parser');
 // message string got from Ingics Gateway (for example: iGS01S)
@@ -62,15 +76,31 @@ parser.parseMessage(message, (data) => {
   beacon: '3C253BC92ABB',
   gateway: 'C0563D4FF278',
   rssi: -56,
-  payload: '02010612FF590080BCD200000E161600FFFFFFFFFFFF',
-  parsedPayload:
-   { mfg: 'Ingics',
-     mfgCode: 89,
-     battery: 210,
-     events: {},
-     type: 'iBS01T',
-     temperature: 5646,
-     humidity: 22 } }
+  fullMessage:
+   '$GPRP,3C253BC92ABB,C0563D4FF278,-56,02010612FF590080BCD200000E161600FFFFFFFFFFFF',
+  timestamp: 1589449428889,
+  advertisement:
+   ad {
+     raw:
+      <Buffer 02 01 06 12 ff 59 00 80 bc d2 00 00 0e 16 16 00 ff ff ff ff ff ff>,
+     flags: 6,
+     localName: undefined,
+     txPowerLevel: undefined,
+     manufacturerData:
+      msd {
+        raw: <Buffer 59 00 80 bc d2 00 00 0e 16 16 00 ff ff ff ff ff ff>,
+        mfg: 89,
+        company: 'Ingics',
+        code: 48256,
+        battery: 210,
+        events: {},
+        eventFlag: 0,
+        type: 'iBS01T',
+        temperature: 5646,
+        humidity: 22 },
+     serviceData: [],
+     serviceUuids: [],
+     serviceSolicitationUuids: [] } }
 ```
 
 ## Command Line Usage
