@@ -1,6 +1,6 @@
 {
   "name": "@ingics/message-parser",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "Message parser library for Ingics BLE beacon and gateway products.",
   "main": "index.js",
   "scripts": {
