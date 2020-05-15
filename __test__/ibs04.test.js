@@ -8,7 +8,7 @@ describe('various ibs04 payload test', () => {
             expect(data.gateway).toBe('E3C33FF55AEC')
             const msd = data.advertisement.manufacturerData
             expect(msd.type).toBe('iBS04')
-            expect(msd.battery).toBe(314)
+            expect(msd.battery).toBe(3.14)
             expect(msd.events.button).toBe(true)
         })
     })

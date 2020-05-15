@@ -7,7 +7,7 @@ describe('various ibs02 payload test', () => {
         parser.parseMessage(message, (data) => {
             const msd = data.advertisement.manufacturerData
             expect(msd.type).toBe('iBS02HM')
-            expect(msd.battery).toBe(296)
+            expect(msd.battery).toBe(2.96)
         })
     })
 })

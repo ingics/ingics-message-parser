@@ -9,7 +9,7 @@ describe('various ibs01 payload test', () => {
             expect(data.gateway).toBe('2F9203AFA66B')
             const msd = data.advertisement.manufacturerData
             expect(msd.type).toBe('iBS01')
-            expect(msd.battery).toBe(310)
+            expect(msd.battery).toBe(3.10)
             expect(msd.events.button).toBe(true)
             expect(msd.is('ibs')).toBe(true)
             expect(msd.is('ingics')).toBe(true)
@@ -21,7 +21,7 @@ describe('various ibs01 payload test', () => {
         parser.parseMessage(message, (data) => {
             const msd = data.advertisement.manufacturerData
             expect(msd.type).toBe('iBS01')
-            expect(msd.battery).toBe(299)
+            expect(msd.battery).toBe(2.99)
             expect(msd.events.hall).toBe(true)
         })
     })
@@ -41,7 +41,7 @@ describe('various ibs01 payload test', () => {
             const msd = data.advertisement.manufacturerData
             expect(msd.type).toBe('iBS01T')
             expect(msd.humidity).toBe(67)
-            expect(msd.temperature).toBe(3450)
+            expect(msd.temperature).toBe(34.50)
         })
     })
 
@@ -55,10 +55,10 @@ describe('various ibs01 payload test', () => {
             if (index === 0) {
                 expect(msd.type).toBe('iBS01T')
                 expect(msd.humidity).toBe(67)
-                expect(msd.temperature).toBe(3450)
+                expect(msd.temperature).toBe(34.50)
             } else if (index === 1) {
                 expect(msd.type).toBe('iBS01')
-                expect(msd.battery).toBe(299)
+                expect(msd.battery).toBe(2.99)
                 expect(msd.events.hall).toBe(true)
             }
         })
@@ -76,10 +76,10 @@ describe('various ibs01 payload test', () => {
             if (index === 0) {
                 expect(msd.type).toBe('iBS01T')
                 expect(msd.humidity).toBe(67)
-                expect(msd.temperature).toBe(3450)
+                expect(msd.temperature).toBe(34.50)
             } else if (index === 1) {
                 expect(msd.type).toBe('iBS01')
-                expect(msd.battery).toBe(299)
+                expect(msd.battery).toBe(2.99)
                 expect(msd.events.hall).toBe(true)
             }
         })

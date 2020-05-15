@@ -7,7 +7,7 @@ describe('various ibs03 payload test', () => {
         parser.parseMessage(message, (data) => {
             const msd = data.advertisement.manufacturerData
             expect(msd.type).toBe('iBS03T')
-            expect(msd.temperature).toBe(2314)
+            expect(msd.temperature).toBe(23.14)
             expect(typeof msd.humidity).toBe('undefined')
             expect(typeof msd.events.button).not.toBe('undefined')
         })
@@ -18,7 +18,7 @@ describe('various ibs03 payload test', () => {
         parser.parseMessage(message, (data) => {
             const msd = data.advertisement.manufacturerData
             expect(msd.type).toBe('iBS03T')
-            expect(msd.temperature).toBe(2978)
+            expect(msd.temperature).toBe(29.78)
             expect(msd.humidity).toBe(71)
         })
     })
@@ -28,7 +28,7 @@ describe('various ibs03 payload test', () => {
         parser.parseMessage(message, (data) => {
             const msd = data.advertisement.manufacturerData
             expect(msd.type).toBe('iBS03RG')
-            expect(msd.battery).toBe(318)
+            expect(msd.battery).toBe(3.18)
             expect(msd.events.moving).toBe(true)
         })
     })
@@ -39,9 +39,9 @@ describe('various ibs03 payload test', () => {
             const msd = data.advertisement.manufacturerData
             expect(msd.company).toBe('Ingics')
             expect(msd.type).toBe('iBS03TP')
-            expect(msd.battery).toBe(296)
-            expect(msd.temperature).toBe(2520)
-            expect(msd.temperatureExt).toBe(2566)
+            expect(msd.battery).toBe(2.96)
+            expect(msd.temperature).toBe(25.20)
+            expect(msd.temperatureExt).toBe(25.66)
         })
     })
 })
