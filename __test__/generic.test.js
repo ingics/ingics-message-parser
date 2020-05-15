@@ -36,4 +36,10 @@ describe('generic ad test', () => {
         const advertisement = parser.parsePayload(payload)
         expect(advertisement.serviceUuids[0]).toBe('1801')
     })
+
+    it ('Appearance', () => {
+        const payload = '031980000201060E094E6F726469635F426C696E6B79'
+        const advertisement = parser.parsePayload(payload)
+        expect(advertisement.appearance).toBe('Generic Computer.')
+    })
 })
