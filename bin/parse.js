@@ -23,6 +23,8 @@ const argv = yargs
     .alias('help', 'h')
     .argv
 
+require('util').inspect.defaultOptions.depth = null
+
 switch (argv._[0]) {
 case 'message':
     if (typeof argv._[1] === 'undefined') {
