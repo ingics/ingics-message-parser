@@ -20,7 +20,7 @@ describe('special data for iGS03', () => {
     })
 
     it('GPS, with timestamp', () => {
-        const message = '$GPSR,C82B96AE3B04,C82B96AE3B04,-127,200608,073549,-24.993477,121.422981,0.0,3.5,1591609841'
+        const message = '$GPSR,C82B96AE3B04,C82B96AE3B04,-127,200608,073549.00,-24.993477,121.422981,0.0,3.5,1591609841'
         parser.parseMessage(message, (data) => {
             expect(data.timestamp).toBe(1591609841000)
             const gnss = data.gnss
