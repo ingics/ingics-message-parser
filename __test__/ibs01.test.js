@@ -16,6 +16,15 @@ describe('various ibs01 payload test', () => {
         })
     })
 
+    it('text mode, with subtype, button pressed', () => {
+        const message = '$GPRP,F72E909E785F,C82B96AE3B04,-50,02010612FF590080BC2C0101FFFFFFFF000003000000'
+        parser.parseMessage(message, (data) => {
+            const msd = data.advertisement.manufacturerData
+            expect(msd.type).toBe('iBS01')
+            expect(msd.events.button).toBe(true)
+        })
+    })
+
     it('text mode, hall sensor', () => {
         const message = '$GPRP,F704B6D48BE8,1173AE7325A2,-24,02010612FF590080BC2B0104FFFFFFFFFFFFFFFFFFFF'
         parser.parseMessage(message, (data) => {
