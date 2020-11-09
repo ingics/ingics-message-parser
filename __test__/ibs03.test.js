@@ -13,7 +13,7 @@ describe('various ibs03 payload test', () => {
         })
     })
 
-    it('iBS03T (NEW)', () => {
+    it('iBS03T_RH', () => {
         const message = '$GPRP,CDCB34E2D0A2,77AE1C1DC33D,-91,02010612FF0D0083BCAD0000A20B4700FFFF14000000'
         parser.parseMessage(message, (data) => {
             const msd = data.advertisement.manufacturerData
@@ -45,6 +45,16 @@ describe('various ibs03 payload test', () => {
             expect(msd.battery).toBe(2.96)
             expect(msd.temperature).toBe(25.20)
             expect(msd.temperatureExt).toBe(25.66)
+        })
+    })
+
+    it('iBS03R', () => {
+        const message = '$GPRP,0C61CFC14A4E,E3C33FF55AEC,-50,02010612FF0D0083BCFFFF00FFFF6400000013030000'
+        parser.parseMessage(message, (data) => {
+            const msd = data.advertisement.manufacturerData
+            expect(msd.type).toBe('iBS03R')
+            expect(msd.range).toBe(100)
+            expect(typeof msd.humidity).toBe('undefined')
         })
     })
 })
