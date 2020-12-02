@@ -8,7 +8,7 @@ describe('various ibs02 payload test', () => {
             const msd = data.advertisement.manufacturerData
             expect(msd.type).toBe('iBS02IR2')
             expect(msd.battery).toBe(2.88)
-            expect(msd.events.detect).toBe(true)
+            expect(msd.events.ir).toBe(true)
         })
     })
 
@@ -18,17 +18,17 @@ describe('various ibs02 payload test', () => {
             const msd = data.advertisement.manufacturerData
             expect(msd.type).toBe('iBS02PIR2')
             expect(msd.battery).toBe(3.3)
-            expect(msd.events.detect).toBe(true)
+            expect(msd.events.pir).toBe(true)
         })
     })
 
     it('iBS02M2', () => {
         let msd = parser.parsePayload('02010612FF0D0083BC3E0140AAAAFFFF000004070000').manufacturerData
         expect(msd.type).toBe('iBS02M2')
-        expect(msd.events.detect).toBe(true)
+        expect(msd.events.din).toBe(true)
         expect(msd.events.button).toBe(undefined)
         msd = parser.parsePayload('02010612FF0D0083BC3E0100AAAAFFFF000004070000').manufacturerData
-        expect(msd.events.detect).toBe(false)
+        expect(msd.events.din).toBe(false)
         expect(msd.events.hall).toBe(undefined)
     })
 })
