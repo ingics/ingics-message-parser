@@ -12,4 +12,16 @@ describe('various ibs04 payload test', () => {
             expect(msd.events.button).toBe(true)
         })
     })
+
+    it('scan respose for ibs04i', () => {
+        const message = '$RSPR,0081F986452C,F008D1789208,-61,02010612FF0D0083BC1F0100AAAAFFFF000018030000'
+        parser.parseMessage(message, (data) => {
+            expect(data.beacon).toBe('0081F986452C')
+            expect(data.gateway).toBe('F008D1789208')
+            const msd = data.advertisement.manufacturerData
+            expect(msd.type).toBe('iBS04i')
+            expect(msd.battery).toBe(2.87)
+            expect(msd.events.button).toBe(false)
+        })
+    })
 })
