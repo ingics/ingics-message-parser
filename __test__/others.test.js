@@ -36,4 +36,21 @@ describe('various other beacon data', () => {
     //     expect(msd.minor).toBe(857)
     //     expect(msd.tx).toBe(-42)
     // })
+
+    it ('Empty payload message', () => {
+        const message = '$GPRP,3D0A662DC412,C3674946C293,-62,'
+        parser.parseMessage(message, (data) => {
+            const msd = data.advertisement.manufacturerData
+            expect(msd).toBe(undefined)
+        })
+    })
+
+    it ('Empty payload message with timestamp', () => {
+        const message = '$GPRP,3D0A662DC412,C3674946C293,-62,,1575440728'
+        parser.parseMessage(message, (data) => {
+            const msd = data.advertisement.manufacturerData
+            expect(msd).toBe(undefined)
+            expect(data.timestamp).toBe(1575440728000)
+        })
+    })
 })
