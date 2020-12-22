@@ -41,7 +41,7 @@ describe('various other beacon data', () => {
         const message = '$GPRP,3D0A662DC412,C3674946C293,-62,'
         parser.parseMessage(message, (data) => {
             const msd = data.advertisement.manufacturerData
-            expect(msd).toBe(undefined)
+            expect(msd).toBeUndefined()
         })
     })
 
@@ -49,7 +49,7 @@ describe('various other beacon data', () => {
         const message = '$GPRP,3D0A662DC412,C3674946C293,-62,,1575440728'
         parser.parseMessage(message, (data) => {
             const msd = data.advertisement.manufacturerData
-            expect(msd).toBe(undefined)
+            expect(msd).toBeUndefined()
             expect(data.timestamp).toBe(1575440728000)
         })
     })
