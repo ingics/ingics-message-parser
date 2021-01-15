@@ -63,7 +63,7 @@ describe('various ibs03 payload test', () => {
         parser.parseMessage(message, (data) => {
             const msd = data.advertisement.manufacturerData
             expect(msd.type).toBe('iBS03P')
-            expect(msd.temperature).toBe(20.02)
+            expect(msd.temperatureExt).toBe(20.02)
             expect(typeof msd.humidity).toBe('undefined')
         })  
     })
