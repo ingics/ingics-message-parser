@@ -74,6 +74,19 @@ describe('generic ad test', () => {
         })
     })
 
+    it ('multi messages in JSON', () => {
+        const messages = [
+            '$GPRP,7ABA6F20ACCF,806172C89C09,-2,02010612FF590080BCFF00007A0D4300FFFFFFFFFFFF',
+            '$GPRP,F704B6D48BE8,1173AE7325A2,-24,02010612FF590080BC2B0104FFFFFFFFFFFFFFFFFFFF'
+        ]
+        const logs = parser.parseMessage(JSON.stringify({ data: messages }))
+        expect(logs).toHaveLength(2)
+        expect(logs[0].advertisement.manufacturerData.humidity).toBe(67)
+        expect(logs[0].advertisement.manufacturerData.temperature).toBe(34.50)
+        expect(logs[1].advertisement.manufacturerData.battery).toBe(2.99)
+        expect(logs[1].advertisement.manufacturerData.events.hall).toBe(true)
+    })
+
     it ('empty payload', () => {
         const message = '$GPRP,7ABA6F20ACCF,806172C89C09,-2,'
         parser.parseMessage(message, (log) => {
