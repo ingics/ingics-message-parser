@@ -67,4 +67,18 @@ describe('various ibs03 payload test', () => {
             expect(typeof msd.humidity).toBe('undefined')
         })  
     })
+
+    it('iBS03GP', () => {
+        const message = '$GPRP,806FB0C9963F,C3674946C293,-71,0201061BFF0D0085BC3111160082FF9EFE4E001200D2FE10003A005CFFD9C5'
+        parser.parseMessage(message, (data) => {
+            const msd = data.advertisement.manufacturerData
+            expect(msd.type).toBe('iBS03GP')
+            expect(msd.battery).toBe(3.05)
+            expect(msd.events.moving).toBe(true)
+            expect(msd.accels[0]['x']).toBe(22)
+            expect(msd.accels[1]['y']).toBe(18)
+            expect(msd.accels[2]['z']).toBe(-164)
+            expect(msd.gp).toBe(1012.98)
+        })
+    })
 })
