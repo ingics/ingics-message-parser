@@ -13,7 +13,7 @@ describe('special data for iGS05', () => {
     })
 
     it('iBS05T', () => {
-        const message = '$GPRP,EAC653D3AA8D,CCB97E7361A4,-44,02010612FF2C0885BC4A0100A10AFFFF000035000000'
+        const message = '$GPRP,EAC653D3AA8D,CCB97E7361A4,-44,02010612FF2C0885BC4A0100A10AFFFF000032000000'
         parser.parseMessage(message, (data) => {
             const ad = data.advertisement
             const msd = ad.manufacturerData
@@ -24,7 +24,7 @@ describe('special data for iGS05', () => {
     })
 
     it('iBS05G', () => {
-        const message = '$GPRP,EAC653D3AA8C,CCB97E7361A4,-44,02010612FF2C0885BC290102AAAAFFFF000036000000'
+        const message = '$GPRP,EAC653D3AA8C,CCB97E7361A4,-44,02010612FF2C0885BC290102AAAAFFFF000033000000'
         parser.parseMessage(message, (data) => {
             const ad = data.advertisement
             const msd = ad.manufacturerData
