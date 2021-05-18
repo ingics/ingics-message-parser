@@ -32,4 +32,13 @@ describe('special data for iGS05', () => {
             expect(msd.events['moving']).toBe(true)
         })
     })
+
+    it('iBS05CO2', () => {
+        const message = '$GPRP,C8B629D6DAC3,F008D1789294,-35,02010612FF2C0883BC270100AAAA6804000034010000'
+        parser.parseMessage(message, (data) => {
+            const ad = data.advertisement
+            const msd = ad.manufacturerData
+            expect(msd.type).toBe('iBS05CO2')
+        })
+    })
 })
