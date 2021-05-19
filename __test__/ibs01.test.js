@@ -54,6 +54,16 @@ describe('various ibs01 payload test', () => {
         })
     })
 
+    it('temperature and humidity with subtype', () => {
+        const message = '$GPRP,C874A59968B3,F008D1789208,-59,02010612FF590080BC2E0100BF0A3900000005000000'
+        parser.parseMessage(message, (data) => {
+            const msd = data.advertisement.manufacturerData
+            expect(msd.type).toBe('iBS01T')
+            expect(msd.humidity).toBe(57)
+            expect(msd.temperature).toBe(27.51)
+        })
+    })
+
     it('text mode, mutiple messages', () => {
         const messages = [
             '$GPRP,7ABA6F20ACCF,806172C89C09,-2,02010612FF590080BCFF00007A0D4300FFFFFFFFFFFF',
