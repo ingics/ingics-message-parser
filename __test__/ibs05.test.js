@@ -39,6 +39,7 @@ describe('special data for iGS05', () => {
             const ad = data.advertisement
             const msd = ad.manufacturerData
             expect(msd.type).toBe('iBS05CO2')
+            expect(msd.temperature).toBeUndefined()
         })
     })
 })
