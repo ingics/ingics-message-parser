@@ -70,4 +70,11 @@ describe('various other beacon data', () => {
         expect(events).toContain('ir')
         expect(events).toContain('din')
     })
+
+    it ('Payload with 00 appended', () => {
+        const payload = '0F09624C696E6B2D313636422D424C45000000000000000000000000000000'
+        const advertisement = parser.parsePayload(payload)
+        expect(advertisement.localName).toBe('bLink-166B-BLE')
+        expect(advertisement.error).toBeUndefined()
+    })
 })
