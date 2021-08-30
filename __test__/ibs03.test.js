@@ -49,11 +49,11 @@ describe('various ibs03 payload test', () => {
     })
 
     it('iBS03R', () => {
-        const message = '$GPRP,0C61CFC14A4E,E3C33FF55AEC,-50,02010612FF0D0083BCFFFF00FFFF6400000013030000'
+        const message = '$GPRP,0C61CFC14A4E,E3C33FF55AEC,-50,02010612FF0D0083BC280100AAAA7200000013090000'
         parser.parseMessage(message, (data) => {
             const msd = data.advertisement.manufacturerData
             expect(msd.type).toBe('iBS03R')
-            expect(msd.range).toBe(100)
+            expect(msd.range).toBe(114)
             expect(typeof msd.humidity).toBe('undefined')
         })
     })
