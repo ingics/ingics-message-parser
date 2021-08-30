@@ -64,7 +64,7 @@ describe('various ibs01 payload test', () => {
         })
     })
 
-    it('text mode, mutiple messages', () => {
+    it('text mode, multiple messages', () => {
         const messages = [
             '$GPRP,7ABA6F20ACCF,806172C89C09,-2,02010612FF590080BCFF00007A0D4300FFFFFFFFFFFF',
             '$GPRP,F704B6D48BE8,1173AE7325A2,-24,02010612FF590080BC2B0104FFFFFFFFFFFFFFFFFFFF'
