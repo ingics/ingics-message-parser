@@ -33,4 +33,17 @@ describe('igs decoded format', () => {
             expect(msd.accels[0].z).toBe(-264)
         })
     })
+
+    it ('Unknown beacon type', () => {
+        const message = '{"data":[{"ts":1635216015.787,"reader":"F008D178943C","tag":"493E7AA0AABB","rssi":-45,"type":"Unknown","raw_data":"1EFF06000109200256550FCFD42400F3086F51FCD0BFCAAAAB498B33997FFE"}]}'
+        parser.parseMessage(message, (data) => {
+            const msd = data.advertisement.manufacturerData
+            expect(data.timestamp).toBe(1635216015787)
+            expect(data.gateway).toBe('F008D178943C')
+            expect(data.beacon).toBe('493E7AA0AABB')
+            expect(data.rssi).toBe(-45)
+            expect(msd.type).toBeUndefined()
+            expect(Buffer.isBuffer(data.advertisement.raw)).toBe(true)
+        })
+    })
 })
