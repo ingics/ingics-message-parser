@@ -26,7 +26,7 @@ describe('igs decoded format', () => {
             expect(data.beacon).toBe('F88A5EB8CDC7')
             expect(data.rssi).toBe(-55)
             expect(msd.type).toBe('iBS03GP')
-            expect(msd.company).toBe('Ingics')
+            expect(msd.is('ingics')).toBe(true)
             expect(msd.battery).toBe(2.64)
             expect(msd.accels[0].x).toBe(0)
             expect(msd.accels[0].y).toBe(0)
@@ -44,6 +44,19 @@ describe('igs decoded format', () => {
             expect(data.rssi).toBe(-45)
             expect(msd.type).toBeUndefined()
             expect(Buffer.isBuffer(data.advertisement.raw)).toBe(true)
+        })
+    })
+
+    it ('iBeacon mapping', () => {
+        const message = '{"ts":1635233134.415,"reader":"F008D178943C","tag":"D42202001BEB","rssi":-67,"type":"iBeacon","uuid":"E2C56DB5DFFB48D2B060D0F5A71096E0","major":10,"minor":100,"tx_power":-59}'
+        parser.parseMessage(message, (data) => {
+            const msd = data.advertisement.manufacturerData
+            expect(msd.is('ibeacon')).toBe(true)
+            expect(msd.type).toBe('iBeacon')
+            expect(msd.uuid).toBe('E2C56DB5-DFFB-48D2-B060-D0F5A71096E0')
+            expect(msd.major).toBe(10)
+            expect(msd.minor).toBe(100)
+            expect(msd.tx).toBe(-59)
         })
     })
 })
