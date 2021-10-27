@@ -87,4 +87,18 @@ describe('igs decoded format', () => {
             expect(data.gateway).toBe('F008D1798C60')
         })
     })
+
+    it ('GNSS', () => {
+        const message = '{"data":[{"ts":1633561383,"reader":"F008D1798C28","type":"GNSS","lat":22.991034,"long":120.175339,"speed":0.0,"hdop":2.3}]}'
+        parser.parseMessage(message, (data) => {
+            expect(data.timestamp).toBe(1633561383000)
+            expect(data.type).toBe('GPSR')
+            expect(data.gateway).toBe('F008D1798C28')
+            const gnss = data.gnss
+            expect(gnss.latitude).toBe(22.991034)
+            expect(gnss.longitude).toBe(120.175339)
+            expect(gnss.speed).toBe(0)
+            expect(gnss.hdop).toBe(2.3)
+        })
+    })
 })
