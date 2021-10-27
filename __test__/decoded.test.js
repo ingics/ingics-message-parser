@@ -78,4 +78,13 @@ describe('igs decoded format', () => {
             expect(msd.events.button).toBe(false)
         })
     })
+
+    it ('HEARTBEAT', () => {
+        const message = '{"data":[{"ts":1635323618,"gw":"F008D1798C60","type":"HEARTBEAT"}]}'
+        parser.parseMessage(message, (data) => {
+            expect(data.timestamp).toBe(1635323618000)
+            expect(data.type).toBe('HBRP')
+            expect(data.gateway).toBe('F008D1798C60')
+        })
+    })
 })

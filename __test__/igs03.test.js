@@ -54,4 +54,21 @@ describe('special data for iGS03', () => {
             expect(fixDate.getUTCMinutes()).toBe(35)
         })
     })
+
+    it('HBRP, without timestamp', () => {
+        const message = '$HBRP,F008D1798C60,F008D1798C60,-127,00000000'
+        parser.parseMessage(message, (data) => {
+            expect(data.type).toBe('HBRP')
+            expect(data.gateway).toBe('F008D1798C60')
+        })
+    })
+
+    it('HBRP, with timestamp', () => {
+        const message = '$HBRP,F008D1798C60,F008D1798C60,-127,00000000,1635322857'
+        parser.parseMessage(message, (data) => {
+            expect(data.type).toBe('HBRP')
+            expect(data.gateway).toBe('F008D1798C60')
+            expect(data.timestamp).toBe(1635322857000)
+        })
+    })
 })
