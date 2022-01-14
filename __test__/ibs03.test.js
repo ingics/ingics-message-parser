@@ -14,12 +14,12 @@ describe('various ibs03 payload test', () => {
     })
 
     it('iBS03T_RH', () => {
-        const message = '$GPRP,CDCB34E2D0A2,77AE1C1DC33D,-91,02010612FF0D0083BCAD0000A20B4700FFFF14000000'
+        const message = '$GPRP,0081F96B8F51,98F4AB891854,-66,02010612FF0D0083BC3E0100AA073100000014130000'
         parser.parseMessage(message, (data) => {
             const msd = data.advertisement.manufacturerData
             expect(msd.type).toBe('iBS03T')
-            expect(msd.temperature).toBe(29.78)
-            expect(msd.humidity).toBe(71)
+            expect(msd.temperature).toBe(19.62)
+            expect(msd.humidity).toBe(49)
         })
     })
 
