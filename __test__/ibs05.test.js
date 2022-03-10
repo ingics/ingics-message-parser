@@ -42,4 +42,13 @@ describe('special data for iGS05', () => {
             expect(msd.temperature).toBeUndefined()
         })
     })
+
+    it('iBS05 CFG RSPR', () => {
+        const message = '$RSPR,C8FDEF6AD8BB,F008D1798BA4,-64,11072B3264B41C6D1A84BD4698B200004E1B0B0969425330352D44384242,1646903203'
+        parser.parseMessage(message, (data) => {
+            const ad = data.advertisement
+            expect(ad.localName).toBe('iBS05-D8BB')
+            expect(ad.serviceUuids[0]).toBe('1B4E0000-B298-46BD-841A-6D1CB464322B')
+        })
+    })
 })

@@ -35,6 +35,26 @@ describe('generic ad test', () => {
         const payload = '0B09506978656C203420584C0303011805166E2A1111'
         const advertisement = parser.parsePayload(payload)
         expect(advertisement.serviceUuids[0]).toBe('1801')
+        const payload2 = '0B09506978656C203420584C05030118456705166E2A1111'
+        const advertisement2 = parser.parsePayload(payload2)
+        expect(advertisement2.serviceUuids[0]).toBe('1801')
+        expect(advertisement2.serviceUuids[1]).toBe('6745')
+    })
+
+    it ('32bit Service UUID', () => {
+        const payload = '0B09506978656C203420584C05050118456705166E2A1111'
+        const advertisement = parser.parsePayload(payload)
+        expect(advertisement.serviceUuids[0]).toBe('67451801')
+        const payload2 = '0B09506978656C203420584C090501184567AABBCCDD05166E2A1111'
+        const advertisement2 = parser.parsePayload(payload2)
+        expect(advertisement2.serviceUuids[0]).toBe('67451801')
+        expect(advertisement2.serviceUuids[1]).toBe('DDCCBBAA')
+    })
+
+    it ('128bit Service UUID', () => {
+        const payload = '0201061107B4DF5A1C3F6BF4BFEA4A820304901A02'
+        const advertisement = parser.parsePayload(payload)
+        expect(advertisement.serviceUuids[0]).toBe('021A9004-0382-4AEA-BFF4-6B3F1C5ADFB4')
     })
 
     it ('Appearance', () => {
@@ -46,7 +66,7 @@ describe('generic ad test', () => {
     it ('multi messages', () => {
         const messages = [
             '$GPRP,7ABA6F20ACCF,806172C89C09,-2,02010612FF590080BCFF00007A0D4300FFFFFFFFFFFF',
-            '$GPRP,F704B6D48BE8,1173AE7325A2,-24,02010612FF590080BC2B0104FFFFFFFFFFFFFFFFFFFF'    
+            '$GPRP,F704B6D48BE8,1173AE7325A2,-24,02010612FF590080BC2B0104FFFFFFFFFFFFFFFFFFFF'
         ]
         const logs = parser.parseMessage(messages.join('\r\n'))
         expect(logs).toHaveLength(2)
@@ -59,7 +79,7 @@ describe('generic ad test', () => {
     it ('multi message with cb', () => {
         const messages = [
             '$GPRP,7ABA6F20ACCF,806172C89C09,-2,02010612FF590080BCFF00007A0D4300FFFFFFFFFFFF',
-            '$GPRP,F704B6D48BE8,1173AE7325A2,-24,02010612FF590080BC2B0104FFFFFFFFFFFFFFFFFFFF'    
+            '$GPRP,F704B6D48BE8,1173AE7325A2,-24,02010612FF590080BC2B0104FFFFFFFFFFFFFFFFFFFF'
         ]
         parser.parseMessage(messages.join('\r\n'), (log, index) => {
             if (index === 0) {
