@@ -23,6 +23,19 @@ describe('special data for iGS05', () => {
         })
     })
 
+    it('iWS01', () => {
+        const message = '$GPRP,EAC653D3AA8D,CCB97E7361A4,-44,02010612FF2C0883BC4A0100A10A3100000039000000'
+        parser.parseMessage(message, (data) => {
+            console.log(data)
+            const ad = data.advertisement
+            const msd = ad.manufacturerData
+            expect(msd.type).toBe('iWS01')
+            expect(msd.battery).toBe(3.3)
+            expect(msd.temperature).toBe(27.21)
+            expect(msd.humidity).toBe(49)
+        })
+    })
+
     it('iBS05G', () => {
         const message = '$GPRP,EAC653D3AA8C,CCB97E7361A4,-44,02010612FF2C0883BC290102AAAAFFFF000033000000'
         parser.parseMessage(message, (data) => {
