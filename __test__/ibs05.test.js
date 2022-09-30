@@ -64,4 +64,17 @@ describe('special data for iGS05', () => {
             expect(ad.serviceUuids[0]).toBe('1B4E0000-B298-46BD-841A-6D1CB464322B')
         })
     })
+
+    it('iBS05RG', () => {
+        const message = '$GPRP,806FB0C9963F,C3674946C293,-71,02010619FF2C0881BC3E110A00F4FF00FF1600F6FF00FF1400F6FF08FF,1586245829'
+        parser.parseMessage(message, (data) => {
+            const msd = data.advertisement.manufacturerData
+            expect(msd.type).toBe('iBS05RG')
+            expect(msd.battery).toBe(3.18)
+            expect(msd.events.moving).toBe(true)
+            expect(msd.accels[0]['x']).toBe(10)
+            expect(msd.accels[1]['y']).toBe(-10)
+            expect(msd.accels[2]['z']).toBe(-248)
+        })
+    })
 })
