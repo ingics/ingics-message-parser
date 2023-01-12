@@ -93,4 +93,13 @@ describe('various ibs03 payload test', () => {
             expect(msd.battery).toBe(3.23)
         })
     })
+
+    it('iBS03F', () => {
+        const message = '$GPRP,70B9507273F0,F008D1789200,-65,02010612FF0D0083BC290140AAAA000000001B090000'
+        parser.parseMessage(message, (data) => {
+            const msd = data.advertisement.manufacturerData
+            expect(msd.type).toBe('iBS03F')
+            expect(msd.events.din).toBe(true)
+        })
+    })
 })
