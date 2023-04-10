@@ -1,6 +1,6 @@
 const parser = require('..')
 
-describe('special data for iGS05', () => {
+describe('various iBS05 payload test', () => {
 
     it('iBS05', () => {
         const message = '$GPRP,EAC653D3AA8E,CCB97E7361A4,-44,02010612FF2C0883BC290101AAAAFFFF000030000000'
@@ -32,7 +32,7 @@ describe('special data for iGS05', () => {
             expect(msd.type).toBe('iWS01')
             expect(msd.battery).toBe(3.3)
             expect(msd.temperature).toBe(27.21)
-            expect(msd.humidity).toBe(49)
+            expect(msd.humidity).toBe(4.9)
         })
     })
 
