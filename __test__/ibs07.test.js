@@ -4,7 +4,6 @@ describe('various ibs07 payload test', () => {
     it('ibs07', () => {
         const message = '$GPRP,C7B3D4AE866D,F008D1789200,-57,02010618FF2C0887BC330100110B31005A002AFF02007B0050070000'
         parser.parseMessage(message, (data) => {
-            console.log(data)
             const msd = data.advertisement.manufacturerData
             expect(msd.type).toBe('iBS07')
             expect(msd.battery).toBe(3.07)

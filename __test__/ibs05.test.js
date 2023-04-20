@@ -26,7 +26,6 @@ describe('various iBS05 payload test', () => {
     it('iWS01', () => {
         const message = '$GPRP,EAC653D3AA8D,CCB97E7361A4,-44,02010612FF2C0883BC4A0100A10A3100000039000000'
         parser.parseMessage(message, (data) => {
-            console.log(data)
             const ad = data.advertisement
             const msd = ad.manufacturerData
             expect(msd.type).toBe('iWS01')

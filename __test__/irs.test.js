@@ -2,11 +2,11 @@ const parser = require('..')
 
 describe('verious irs02xx test cases', () => {
 
-    it('iBS02HM', () => {
+    it('iBS02M2-RS', () => {
         const message = '$GPRP,F0F8F2CADCCF,C82B96AE3B04,-52,02010612FF0D0082BC280100AAAAFFFF000004050000'
         parser.parseMessage(message, (data) => {
             const msd = data.advertisement.manufacturerData
-            expect(msd.type).toBe('iBS02HM')
+            expect(msd.type).toBe('iBS02M2-RS')
             expect(msd.battery).toBe(2.96)
         })
     })
