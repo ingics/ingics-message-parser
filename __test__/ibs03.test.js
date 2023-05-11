@@ -95,11 +95,35 @@ describe('various ibs03 payload test', () => {
     })
 
     it('iBS03F', () => {
-        const message = '$GPRP,70B9507273F0,F008D1789200,-65,02010612FF0D0083BC290140AAAA000000001B090000'
+        const message = '$GPRP,70B9507273F0,F008D1789200,-65,02010612FF0D0083BC290140AAAA0A0000001B090000'
         parser.parseMessage(message, (data) => {
             const msd = data.advertisement.manufacturerData
             expect(msd.type).toBe('iBS03F')
+            expect(msd.counter).toBe(10)
             expect(msd.events.din).toBe(true)
         })
+    })
+
+    it('iBS03Q', () => {
+        const ad = parser.parsePayload('02010612FF0D0083BC330140AAAA030000001C090000')
+        expect(ad.manufacturerData.type).toBe('iBS03Q')
+        expect(ad.manufacturerData.battery).toBe(3.07)
+        expect(ad.manufacturerData.counter).toBe(3)
+        expect(ad.manufacturerData.events.din).toBe(true)
+    })
+
+    it('iBS03QY', () => {
+        let ad = parser.parsePayload('02010612FF0D0083BC290148AAAA050000001D090000')
+        expect(ad.manufacturerData.type).toBe('iBS03QY')
+        expect(ad.manufacturerData.battery).toBe(2.97)
+        expect(ad.manufacturerData.counter).toBe(5)
+        expect(ad.manufacturerData.events.din).toBe(true)
+        expect(ad.manufacturerData.events.din2).toBe(true)
+        ad = parser.parsePayload('02010612FF0D0083BC290108AAAAFF0000001D090000')
+        expect(ad.manufacturerData.type).toBe('iBS03QY')
+        expect(ad.manufacturerData.battery).toBe(2.97)
+        expect(ad.manufacturerData.counter).toBe(255)
+        expect(ad.manufacturerData.events.din).toBe(false)
+        expect(ad.manufacturerData.events.din2).toBe(true)
     })
 })
