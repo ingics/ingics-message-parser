@@ -163,6 +163,7 @@ describe('various ibs03 payload test', () => {
             expect(msd.temperature).toBeUndefined()
             expect(msd.events.din).toBe(true)
             expect(msd.user).toBe(100)
+            expect(msd.counter).toBe(2566)
         })
     })
 })
