@@ -13,4 +13,42 @@ describe('various ibs08 payload test', () => {
         })
     })
 
+    it('iBS08T', () => {
+        const payload = '02010612FF2C0883BC4C0100CF080B02000041010C00'
+        let msd = parser.parsePayload(payload).manufacturerData        
+        expect(msd.type).toBe('iBS08T')
+        expect(msd.battery).toBe(3.32)
+        expect(msd.temperature).toBe(22.55)
+        expect(msd.humidity).toBe(52.3)
+        expect(msd.user).toBe(0)
+    })
+
+    it('iBS08R', () => {
+        const payload = '02010612FF2C0883BC280100AAAA7200000042090000'
+        let msd = parser.parsePayload(payload).manufacturerData
+        expect(msd.type).toBe('iBS08R')
+        expect(msd.battery).toBe(2.96)
+        expect(msd.range).toBe(114)
+        expect(msd.user).toBe(0)
+    })
+
+    it('iBS08PS', () => {
+        const payload = '02010612FF2C0883BC380120C0086608000043080400'
+        let msd = parser.parsePayload(payload).manufacturerData
+        expect(msd.type).toBe('iBS08PS')        
+        expect(msd.battery).toBe(3.12)
+        expect(msd.temperature).toBe(21.5)
+        expect(msd.temperatureEnv).toBe(22.4)
+        expect(msd.user).toBe(0)
+    })
+
+    it('iBS08PIR', () => {
+        const payload = '02010612FF2C0883BC4A0110AAAAFFFF000044040000'
+        let msd = parser.parsePayload(payload).manufacturerData
+        console.log(msd)
+        expect(msd.type).toBe('iBS08PIR')
+        expect(msd.battery).toBe(3.3)
+        expect(msd.events.pir).toBe(true)
+        expect(msd.user).toBe(0)
+    })
 })
