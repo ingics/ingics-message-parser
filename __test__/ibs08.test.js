@@ -45,7 +45,6 @@ describe('various ibs08 payload test', () => {
     it('iBS08PIR', () => {
         const payload = '02010612FF2C0883BC4A0110AAAAFFFF000044040000'
         let msd = parser.parsePayload(payload).manufacturerData
-        console.log(msd)
         expect(msd.type).toBe('iBS08PIR')
         expect(msd.battery).toBe(3.3)
         expect(msd.events.pir).toBe(true)
