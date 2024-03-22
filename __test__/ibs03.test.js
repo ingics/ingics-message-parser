@@ -127,12 +127,12 @@ describe('various ibs03 payload test', () => {
         expect(ad.manufacturerData.events.din2).toBe(true)
     })
 
-    it ('iBS03AD-NT', () => {
+    it ('iBS03AD-NTC', () => {
         const message = '$GPRP,1804ED7D9C00,C82B96AE3B04,-48,02010612FF0D0083BC280100D809060A640023040000'
         parser.parseMessage(message, (data) => {
             const msd = data.advertisement.manufacturerData
             expect(msd.company).toBe('Ingics')
-            expect(msd.type).toBe('iBS03AD-NT')
+            expect(msd.type).toBe('iBS03AD-NTC')
             expect(msd.battery).toBe(2.96)
             expect(msd.temperature).toBeUndefined()
             expect(msd.temperatureExt).toBe(25.66)
