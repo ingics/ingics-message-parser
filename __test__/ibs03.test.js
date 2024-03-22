@@ -127,12 +127,12 @@ describe('various ibs03 payload test', () => {
         expect(ad.manufacturerData.events.din2).toBe(true)
     })
 
-    it ('iBS03NT', () => {
+    it ('iBS03AD-NT', () => {
         const message = '$GPRP,1804ED7D9C00,C82B96AE3B04,-48,02010612FF0D0083BC280100D809060A640023040000'
         parser.parseMessage(message, (data) => {
             const msd = data.advertisement.manufacturerData
             expect(msd.company).toBe('Ingics')
-            expect(msd.type).toBe('iBS03NT')
+            expect(msd.type).toBe('iBS03AD-NT')
             expect(msd.battery).toBe(2.96)
             expect(msd.temperature).toBeUndefined()
             expect(msd.temperatureExt).toBe(25.66)
@@ -140,12 +140,12 @@ describe('various ibs03 payload test', () => {
         })
     })
 
-    it ('iBS03AD', () => {
+    it ('iBS03AD-DC', () => {
         const message = '$GPRP,1804ED7D9C00,C82B96AE3B04,-48,02010612FF0D0083BC280100D809060A640024040000'
         parser.parseMessage(message, (data) => {
             const msd = data.advertisement.manufacturerData
             expect(msd.company).toBe('Ingics')
-            expect(msd.type).toBe('iBS03AD')
+            expect(msd.type).toBe('iBS03AD-DC')
             expect(msd.battery).toBe(2.96)
             expect(msd.temperature).toBeUndefined()
             expect(msd.voltage).toBe(2566)
@@ -153,12 +153,12 @@ describe('various ibs03 payload test', () => {
         })
     })
 
-    it ('iBS03DI', () => {
+    it ('iBS03AD-DI', () => {
         const message = '$GPRP,1804ED7D9C00,C82B96AE3B04,-48,02010612FF0D0083BC280140D809060A640025040000'
         parser.parseMessage(message, (data) => {
             const msd = data.advertisement.manufacturerData
             expect(msd.company).toBe('Ingics')
-            expect(msd.type).toBe('iBS03DI')
+            expect(msd.type).toBe('iBS03AD-DI')
             expect(msd.battery).toBe(2.96)
             expect(msd.temperature).toBeUndefined()
             expect(msd.events.din).toBe(true)
