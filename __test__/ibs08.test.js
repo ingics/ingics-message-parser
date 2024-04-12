@@ -33,12 +33,12 @@ describe('various ibs08 payload test', () => {
     })
 
     it('iBS08PS', () => {
-        const payload = '02010612FF2C0883BC380120C0086608000043080400'
+        const payload = '02010612FF2C0883BC1E012021071E00000043010100'
         let msd = parser.parsePayload(payload).manufacturerData
-        expect(msd.type).toBe('iBS08PS')        
-        expect(msd.battery).toBe(3.12)
-        expect(msd.temperature).toBe(21.5)
-        expect(msd.temperatureEnv).toBe(22.4)
+        expect(msd.type).toBe('iBS08PS')
+        expect(msd.battery).toBe(2.86)
+        expect(msd.value).toBe(1825)
+        expect(msd.counter).toBe(30)
         expect(msd.user).toBe(0)
     })
 
