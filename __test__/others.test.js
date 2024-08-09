@@ -18,7 +18,7 @@ describe('various other beacon data', () => {
         const advertisement = parser.parsePayload(payload)
         const msd = advertisement.manufacturerData
         expect(msd.company).toBe('Apple, Inc.')
-        expect(msd.uuid).toBe('67B9BC53-211F-51AB-3A4E-CC567DD2A5B9')
+        expect(msd.uuid).toBe('B9A5D27D-56CC-4E3A-AB51-1F2153BCB967')
         expect(msd.major).toBe(1)
         expect(msd.minor).toBe(857)
         expect(msd.tx).toBe(-42)
