@@ -157,4 +157,32 @@ describe('various ibs08 payload test', () => {
         expect(msd.lux).toBe(1977)
         expect(msd.events.button).toBe(false)
     })
+
+    it('iBS08IAQ', () => {
+        let payload = '0201061AFF2C0888BC4901000F091F025A0232004C00DE030A0046040000'
+        let msd = parser.parsePayload(payload).manufacturerData
+        expect(msd.type).toBe('iBS08IAQ')
+        expect(msd.battery).toBe(3.29)
+        expect(msd.temperature).toBe(23.19)
+        expect(msd.humidity).toBe(54.3)
+        expect(msd.co2).toBe(602)
+        expect(msd.pm2p5).toBe(5.0)
+        expect(msd.pm10p0).toBe(7.6)
+        expect(msd.voc).toBe(99.0)
+        expect(msd.nox).toBe(1.0)
+        expect(msd.events.button).toBe(false)
+        // init state, some sensors not ready
+        payload = '0201061AFF2C0888BC4701001A091C02FFFFFFFFFFFF0000FFFF46041000'
+        msd = parser.parsePayload(payload).manufacturerData
+        expect(msd.type).toBe('iBS08IAQ')
+        expect(msd.battery).toBe(3.27)
+        expect(msd.temperature).toBe(23.30)
+        expect(msd.humidity).toBe(54.0)
+        expect(msd.co2).toBeUndefined()
+        expect(msd.pm2p5).toBeUndefined()
+        expect(msd.pm10p0).toBeUndefined()
+        expect(msd.voc).toBe(0)
+        expect(msd.nox).toBeUndefined()
+        expect(msd.events.button).toBe(false)        
+    })
 })
