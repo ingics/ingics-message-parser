@@ -19,6 +19,13 @@ Link parser library to your project
 npm link @ingics/message-parser
 ```
 
+## Test
+
+```bash
+npm test
+npm test -- --testNamePattern="iBS05"
+```
+
 ## Usage
 
 ### Parse BLE payload (advertisement) got from Ingics beacon
