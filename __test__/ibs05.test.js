@@ -12,6 +12,35 @@ describe('various iBS05 payload test', () => {
         })
     })
 
+    it('iBS05H', () => {
+        const messages = [
+            '$GPRP,FDB69134E063,F008D1789200,-75,02010612FF2C0883BC2D0100AAAA04000000310A1000',
+            '$GPRP,FDB69134E063,F008D1789200,-75,02010612FF2C0883BC2D0101AAAA04000000310A1000',
+            '$GPRP,FDB69134E063,F008D1789200,-75,02010612FF2C0883BC2D0104AAAA01800000310A1000',
+        ]
+        for (const [i, message] of messages.entries()) {
+            parser.parseMessage(message, (data) => {
+                const ad = data.advertisement
+                const msd = ad.manufacturerData                
+                expect(msd.type).toBe('iBS05H')
+                expect(msd.battery).toBe(3.01)
+                if (i === 0) {
+                    expect(msd.counter).toBe(4)
+                    expect(msd.events['button']).toBe(false)
+                    expect(msd.events['hall']).toBe(false)
+                } else if (i === 1) {
+                    expect(msd.counter).toBe(4)
+                    expect(msd.events['button']).toBe(true)
+                    expect(msd.events['hall']).toBe(false)
+                } else if (i === 2) {
+                    expect(msd.counter).toBe(32769)
+                    expect(msd.events['button']).toBe(false)
+                    expect(msd.events['hall']).toBe(true)
+                }
+            })
+        }
+    })
+
     it('iBS05T', () => {
         const message = '$GPRP,EAC653D3AA8D,CCB97E7361A4,-44,02010612FF2C0883BC4A0100A10AFFFF000032000000'
         parser.parseMessage(message, (data) => {
