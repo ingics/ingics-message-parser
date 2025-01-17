@@ -111,18 +111,19 @@ describe('various ibs08 payload test', () => {
     })
 
     it('iBS09PS', () => {
-        let payload = '0201061AFF2C0888BC470120AAAA01000000000000000000000043100000'
-        console.log(parser.parsePayload(payload))
+        let payload = '0201061AFF2C0888BC250120FBFF01000000000000000000000043060000'
         let msd = parser.parsePayload(payload).manufacturerData
         expect(msd.type).toBe('iBS09PS')
-        expect(msd.battery).toBe(3.27)
+        expect(msd.battery).toBe(2.93)
         expect(msd.counter).toBe(1)
+        expect(msd.value).toBe(-5)
         expect(msd.events.detect).toBe(true)
-        payload = '0201061AFF2C0888BC470100AAAA00000000000000000000000043100000'
+        payload = '0201061AFF2C0888BC250100010006000000000000000000000043060000'
         msd = parser.parsePayload(payload).manufacturerData
         expect(msd.type).toBe('iBS09PS')
-        expect(msd.battery).toBe(3.27)
-        expect(msd.counter).toBe(0)
+        expect(msd.battery).toBe(2.93)
+        expect(msd.counter).toBe(6)
+        expect(msd.value).toBe(1)
         expect(msd.events.detect).toBe(false)
     })
 
