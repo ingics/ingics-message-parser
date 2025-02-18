@@ -62,6 +62,32 @@ describe('various iBS05 payload test', () => {
         })
     })
 
+    it('iBS05G-Flip', () => {
+        const messages = [
+            '$GPRP,FD40E805B277,F008D1789200,-62,02010612FF2C0883BC3C012002FF000000003A0A1000',
+            '$GPRP,FDB69134E063,F008D1789200,-75,02010612FF2C0883BC3A0101F200000000003A0A1000',
+        ]
+        for (const [i, message] of messages.entries()) {
+            parser.parseMessage(message, (data) => {
+                const ad = data.advertisement
+                const msd = ad.manufacturerData
+                expect(msd.type).toBe('iBS05G-Flip')
+                switch (i) {
+                case 0:
+                    expect(msd.battery).toBe(3.16)
+                    expect(msd.events['button']).toBe(false)
+                    expect(msd.events['flip']).toBe(true)
+                    break
+                case 1:
+                    expect(msd.battery).toBe(3.14)
+                    expect(msd.events['button']).toBe(true)
+                    expect(msd.events['flip']).toBe(false)
+                    break
+                }
+            })
+        }
+    })
+
     it('iBS05CO2', () => {
         const message = '$GPRP,C8B629D6DAC3,F008D1789294,-35,02010612FF2C0883BC270100AAAA6804000034010000'
         parser.parseMessage(message, (data) => {
