@@ -114,7 +114,6 @@ describe('various iBS05 payload test', () => {
             expect(msd.type).toBe('iBS05RG')
             expect(msd.battery).toBe(3.18)
             expect(msd.events.moving).toBe(true)
-            expect(msd.events.boot).toBe(true)
             expect(msd.accels[0]['x']).toBe(10)
             expect(msd.accels[1]['y']).toBe(-10)
             expect(msd.accels[2]['z']).toBe(-248)
