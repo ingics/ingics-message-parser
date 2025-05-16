@@ -93,4 +93,21 @@ describe('various ibs08 payload test', () => {
         expect(msd.nox).toBeUndefined()
         expect(msd.events.button).toBe(false)        
     })
+
+    it('iBS09IR', () => {
+        let payload = '0201061AFF2C0888BC390120AAAAD1000000060000000000000047080000'
+        let msd = parser.parsePayload(payload).manufacturerData
+        expect(msd.type).toBe('iBS09IR')
+        expect(msd.battery).toBe(3.13)
+        expect(msd.events.button).toBe(false)
+        expect(msd.events.ir).toBe(true)
+        expect(msd.counter).toBe(209)
+        payload = '0201061AFF2C0888BC390101AAAAD0000000040000000000000047080000'
+        msd = parser.parsePayload(payload).manufacturerData
+        expect(msd.type).toBe('iBS09IR')
+        expect(msd.battery).toBe(3.13)
+        expect(msd.events.button).toBe(true)
+        expect(msd.events.ir).toBe(false)
+        expect(msd.counter).toBe(208)
+    })
 })
