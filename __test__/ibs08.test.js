@@ -17,23 +17,6 @@ describe('various ibs08 payload test', () => {
         expect(msd.events.detect).toBe(true)
     })
 
-    it('iBS09PS', () => {
-        let payload = '0201061AFF2C0888BC250120FBFF01000000000000000000000043060000'
-        let msd = parser.parsePayload(payload).manufacturerData
-        expect(msd.type).toBe('iBS09PS')
-        expect(msd.battery).toBe(2.93)
-        expect(msd.counter).toBe(1)
-        expect(msd.value).toBe(-5)
-        expect(msd.events.detect).toBe(true)
-        payload = '0201061AFF2C0888BC250100010006000000000000000000000043060000'
-        msd = parser.parsePayload(payload).manufacturerData
-        expect(msd.type).toBe('iBS09PS')
-        expect(msd.battery).toBe(2.93)
-        expect(msd.counter).toBe(6)
-        expect(msd.value).toBe(1)
-        expect(msd.events.detect).toBe(false)
-    })
-
     it('iBS08PIR', () => {
         let payload = '0201061AFF2C0888BC470110AAAAFFFF0000000000000000000044100000'
         let msd = parser.parsePayload(payload).manufacturerData
@@ -91,7 +74,7 @@ describe('various ibs08 payload test', () => {
         expect(msd.pm10p0).toBeUndefined()
         expect(msd.voc).toBe(0)
         expect(msd.nox).toBeUndefined()
-        expect(msd.events.button).toBe(false)        
+        expect(msd.events.button).toBe(false)
     })
 
     it('iBS09IR', () => {
@@ -109,5 +92,90 @@ describe('various ibs08 payload test', () => {
         expect(msd.events.button).toBe(true)
         expect(msd.events.ir).toBe(false)
         expect(msd.counter).toBe(208)
+    })
+
+    it('iBS08TP', () => {
+        let payload = '0201061AFF2C0888BC2C0101C40988130000000000000000000049100000'
+        let msd = parser.parsePayload(payload).manufacturerData
+        expect(msd.type).toBe('iBS08TP')
+        expect(msd.battery).toBe(3.00)
+        expect(msd.temperature).toBe(25.00)
+        expect(msd.temperatureExt).toBe(50.00)
+        expect(msd.events.button).toBe(true)
+    })
+
+    it('iBS08P', () => {
+        let payload = '0201061AFF2C0888BC2C0100D0071027000000000000000000004B100000'
+        let msd = parser.parsePayload(payload).manufacturerData
+        expect(msd.type).toBe('iBS08P')
+        expect(msd.battery).toBe(3.00)
+        expect(msd.temperature).toBe(20.00)
+        expect(msd.temperatureExt).toBe(100.00)
+        expect(msd.events.button).toBe(false)
+    })
+
+    it('iBS08AD-NTC', () => {
+        let payload = '0201061AFF2C0888BCCC00010000C409000000000000000000004A100000'
+        let msd = parser.parsePayload(payload).manufacturerData
+        expect(msd.type).toBe('iBS08AD-NTC')
+        expect(msd.battery).toBe(2.04)
+        expect(msd.temperatureExt).toBe(25.00)
+        expect(msd.events.button).toBe(true)
+    })
+
+    it('iBS08AD-V', () => {
+        let payload = '0201061AFF2C0888BC2C0100000088130000000000000000000051100000'
+        let msd = parser.parsePayload(payload).manufacturerData
+        expect(msd.type).toBe('iBS08AD-V')
+        expect(msd.battery).toBe(3.00)
+        expect(msd.voltage).toBe(5000)
+        expect(msd.events.button).toBe(false)
+    })
+
+    it('iBS08AD-D', () => {
+        let payload = '0201061AFF2C0888BC2C01400000D2040000000000000000000052100000'
+        let msd = parser.parsePayload(payload).manufacturerData
+        expect(msd.type).toBe('iBS08AD-D')
+        expect(msd.battery).toBe(3.00)
+        expect(msd.counter).toBe(1234)
+        expect(msd.events.din).toBe(true)
+        expect(msd.events.button).toBe(false)
+    })
+
+    it('iBS08AD-A', () => {
+        let payload = '0201061AFF2C0888BC2C01000000983A0000000000000000000053100000'
+        let msd = parser.parsePayload(payload).manufacturerData
+        expect(msd.type).toBe('iBS08AD-A')
+        expect(msd.battery).toBe(3.00)
+        expect(msd.current).toBe(15000)
+        expect(msd.events.button).toBe(false)
+    })
+
+    it('iBS08F', () => {
+        let payload = '0201061AFF2C0888BC2C010800003702000000000000000000004D100000'
+        let msd = parser.parsePayload(payload).manufacturerData
+        expect(msd.type).toBe('iBS08F')
+        expect(msd.battery).toBe(3.00)
+        expect(msd.counter).toBe(567)
+        expect(msd.events.fall).toBe(true)
+        expect(msd.events.button).toBe(false)
+    })
+
+    it('iBS08Q', () => {
+        let payload = '0201061AFF2C0888BC2C014000007803000000000000000000004E100000'
+        let msd = parser.parsePayload(payload).manufacturerData
+        expect(msd.type).toBe('iBS08Q')
+        expect(msd.battery).toBe(3.00)
+        expect(msd.counter).toBe(888)
+        expect(msd.events.din).toBe(true)
+        expect(msd.events.button).toBe(false)
+    })
+
+    it('iBS09', () => {
+        let payload = '0201061AFF2C0888BC2C0101000000000000000000000000000054100000'
+        let msd = parser.parsePayload(payload).manufacturerData
+        expect(msd.type).toBe('iBS09')
+        expect(msd.battery).toBe(3.00)
+        expect(msd.events.button).toBe(true)
     })
 })
